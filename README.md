@@ -36,7 +36,7 @@ python3 analyze_gpu_trace.py --by-batch "$out/sweep.sqlite" "$out/traced/runs.cs
 python3 summarize_batch.py "$out"
 ```
 
-The plotting command writes `performance.pdf` and `confusion.pdf`, plus editable SVGs and PNG previews. The performance plot shows all individual GPU times and throughput on all three platforms. The confusion matrix prints all 100 counts, including correct predictions and zeros, alongside error rates for each true digit.
+The plotting command writes PDF, editable SVG and PNG files. The performance figure shows median request times and five-run ranges on all three platforms, then the speedup and efficiency of using two GPUs. The confusion matrix retains all 100 cells, leaves zero counts blank and includes per-digit error rates. The query-partition figure uses the recorded workload dimensions. When the archived `results/figure-1-example.json` is available, it also regenerates the real five-neighbour voting example. Run the plotting command again after both `results/batch_sweep/timed/runs.csv` and `results/batch_repeat5/timed/runs.csv` exist to draw the six-size boxplots with every unprofiled observation.
 
 The trace commands require NVIDIA Nsight Systems with CUDA tracing. To repeat the six-size experiment with five timings and five separate traces per size, choose a fresh `out` and set both repeat counts to 5.
 
