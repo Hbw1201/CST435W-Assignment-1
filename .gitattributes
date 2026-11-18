@@ -1,5 +1,7 @@
 # Preserve the bytes pinned by experiment SHA-256 records on every OS.
 *.py -text
+requirements.txt -text
+Dockerfile.cpu -text
 results/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.sqlite binary
 *.png binary
