@@ -1,0 +1,6 @@
+# Install the matching torch/torchvision wheel pair first (see README.md).
+numpy==1.26.4
+scipy==1.12.0
+matplotlib==3.8.4
+nvidia-ml-py==12.535.133
+pypdf==5.9.0

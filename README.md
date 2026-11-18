@@ -1,49 +1,108 @@
 # CST435W Assignment 1
 
-Exact five-nearest-neighbour classification of MNIST on one CPU thread, one NVIDIA H100, and two H100s in the same host. All three modes search the same 60,000 labelled reference images. The two-GPU implementation partitions the queries and returns predictions in input order.
+Exact five-nearest-neighbour classification of MNIST on one CPU thread, one H100, and two H100s on the same Linux host. Every mode searches all 60,000 training images. GPU workers replicate the reference, split queries, and return labels in input order.
 
-## Run the classifier
+## Installation
 
-The measurements used Linux, Python 3.10.12, PyTorch 2.3.0 with CUDA 12.1, and torchvision 0.18.0. The CPU example needs no GPU. The full benchmark needs two CUDA devices and the NVIDIA driver. Install in a fresh environment, then fetch the standard MNIST files once.
+Use Python 3.10. The measurement host used torch 2.3.0+cu121, torchvision 0.18.0+cu121, NumPy 1.26.4, SciPy 1.12.0 and Matplotlib 3.8.4. Install the matching PyTorch pair first, then the shared requirements, including the NVML monitoring binding and pypdf report dependency.
 
 ```bash
-python3 -m pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cu121
-python3 -m pip install 'numpy<2' matplotlib nvidia-ml-py
-python3 -c "from torchvision.datasets import MNIST; MNIST('data', train=True, download=True); MNIST('data', train=False, download=True)"
-python3 classify.py --mode cpu --limit 100
-python3 classify.py --mode gpu1 --limit 100
-python3 classify.py --mode gpu2 --limit 100
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip==26.0.1
+python -m pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cu121
+python -m pip install -r requirements.txt
+python -m pip check
+python -c "from torchvision.datasets import MNIST; MNIST('data', train=True, download=True); MNIST('data', train=False, download=True)"
 ```
 
-Each command prints test indices, true and predicted digits, a correct count and first-call elapsed time. For each query, the implementation ranks squared Euclidean distances, breaks distance ties by training row, selects five neighbours and breaks vote ties by the smaller digit.
+For CPU-only checks, replace `cu121` with `cpu` in the wheel URL. GPU experiments need two visible CUDA devices and a compatible NVIDIA driver. Some Linux installations need their Python `venv` package installed first. Use an isolated environment without system site packages.
 
-## Reproduce the comparisons
+The full submission records a clean CPU installation in a fresh Linux container, including dependency checks, 18 correctness/CLI checks, statistics verification, trace parsing and figure regeneration. The 50 CPU/GPU checks ran on the measurement server. These are separate validation scopes; the clean CPU environment does not claim to reproduce H100 timings.
 
-Run from the repository root. Each measurement command takes a fresh output directory. The resident experiment uses the full-test CPU predictions produced by the first benchmark.
+## Run and check the classifier
 
 ```bash
-python3 benchmark.py --out results/full_run
-python3 verify_results.py results/full_run --raw data/MNIST/raw --figures figures
-python3 plot_results.py results/full_run --out figures
+python classify.py --mode cpu --limit 100
+python classify.py --mode gpu1 --limit 100
+python classify.py --mode gpu2 --limit 100
+python test_correctness.py --cli
+python test_correctness.py --cuda --cli --out results/my_boundary_check.json
+```
 
-python3 diagnose_gpu.py --out results/placement
+The CLI prints ten zero-based test indices, true and predicted labels, the correct count and first-call wall time. Raw 0–255 pixels become FP64 vectors. Squared distances and training indices determine the five nearest neighbours; tied votes favour the smaller digit. The supported prefix is 1–10,000 queries.
+
+The independent oracle uses direct int64 pixel differences and stable full sorting. Tests cover distance ties at the fifth neighbour, tied votes, extreme pixels, one-query and odd splits, batch boundaries at 255/256/257/513, actual CLI output and invalid limits. There are 50 checks with `--cuda --cli`, or 18 with `--cli` alone.
+
+## Three-session main experiment
+
+Run from the project root and choose fresh output paths. Measurement commands refuse to overwrite an experiment.
+
+```bash
+python benchmark_sessions.py --out results/main_repeat
+python summarize_sessions.py results/main_repeat
+python test_correctness.py --cuda --cli --out results/boundary_validation.json
+```
+
+Three fresh worker processes each load the data once, warm every condition twice, then interleave five requests per size/mode: 135 measured requests in total. Sizes are 100, 1,000 and 10,000 queries; modes are CPU, one GPU and two GPUs. Seed 435 sets the starting orders, which rotate and reverse across rounds. Across all sessions, each mode occupies each order position five times per size.
+
+K=5, FP64, all 60,000 references, and batch 256 are fixed. Both PyTorch CPU thread counts are one. The main thread is pinned to one available CPU for serial work; its original affinity is restored for GPU work. A separate controller samples temperatures, clocks, board load and competing processes every 0.2 seconds.
+
+Timing starts with host tensors ready and ends with ordered labels on the CPU. It includes reference/query uploads, classification, return and joining. Loading, conversion, validation and logging are outside the interval. CUDA-event passes are separate from ordinary timings.
+
+| Evidence | Contents |
+|---|---|
+| `runs.csv` | All 135 requests, session/order, time boundaries, accuracy and peak allocated tensor memory. |
+| `session_summary.csv` | Five-request statistics for each of 27 session/size/mode cells. |
+| `summary.csv` | Mean and sample SD of three session means; approximate 95% Student t intervals, 2 degrees of freedom. |
+| `session_scaling.csv`, `scaling.csv` | Ratios of means within each session, then summaries across sessions. Two-GPU efficiency is speedup divided by two. |
+| `boards.csv`, `monitoring_summary.csv` | Timestamped load, temperatures, clocks and competing-process observations. |
+| `session_01/`–`session_03/` | Original timings, ordered predictions, confusion counts, separate event profiles, per-condition records and hashes. |
+| `schedule.csv`, `environment.json`, `validation.json` | Planned order, hardware/software, input/source hashes, agreement and statistics checks. |
+
+Process RSS is a session-lifetime high-water mark, not an isolated allocation per condition. Seeing no competing process in the samples does not establish exclusive hardware access.
+
+At 10,000 queries, mean ± SD across sessions was **20.066 ± 0.059 s** on the CPU, **120.36 ± 2.18 ms** on one H100 and **83.24 ± 1.38 ms** on two. Mean two-GPU speedup was **1.446** (approximate 95% interval **1.408–1.484**), with 72.3% efficiency. All labels agreed; accuracy was 96.88%. At 100 queries the speedup interval includes parity. The three sessions share one host and date.
+
+## CUDA timeline and figures
+
+The placement and batch tools use the serial reference in `results/full_run/predictions.csv`. In a fresh checkout, create that historical-protocol baseline first. The complete submission already contains it; preserve the archived results.
+
+```bash
+python benchmark.py --out results/full_run
+python verify_results.py results/full_run --raw data/MNIST/raw --figures figures
+out=results/trace_repeat
+mkdir -p "$out"
+nsys profile --sample=none --cpuctxsw=none --trace=cuda --output="$out/trace" \
+  python diagnose_gpu.py --out "$out/traced" --trace --repeats 3
+nsys export --type=sqlite --output="$out/trace.sqlite" "$out/trace.nsys-rep"
+python analyze_gpu_trace.py "$out/trace.sqlite" "$out/traced/runs.csv" "$out" --segments
+python plot_results.py results/full_run --out figures
+python plot_sessions.py results/main_repeat --trace "$out" --out figures
+```
+
+Tracing needs NVIDIA Nsight Systems. `plot_sessions.py` produces the primary `performance-sessions` figure as PDF, SVG and PNG. It shows session means, within-session speedups with intervals, and the second separately traced request at batch 256. Trace durations are excluded from ordinary timing statistics. The trace parser checks process/device identity, request boundaries and actual transfer bytes. Simultaneous kernels do not measure SM occupancy or bandwidth saturation.
+
+`plot_results.py` retains the historical performance figure, full confusion matrix, query-partition diagram and batch boxplots. The real-neighbour figure also needs the archived `results/figure-1-example.json` supplied in the complete submission. Figures use the requested five-colour palette at 162 mm width.
+
+## Resident reference and six batch sizes
+
+```bash
+python diagnose_gpu.py --out results/placement
 out=results/batch_sweep
-python3 sweep_batch.py --out "$out/timed" --repeats 18
+mkdir -p "$out"
+python sweep_batch.py --out "$out/timed" --repeats 18
 nsys profile --sample=none --cpuctxsw=none --trace=cuda --output="$out/sweep" \
-  python3 sweep_batch.py --out "$out/traced" --trace --repeats 12
+  python sweep_batch.py --out "$out/traced" --trace --repeats 12
 nsys export --type=sqlite --output="$out/sweep.sqlite" "$out/sweep.nsys-rep"
-python3 analyze_gpu_trace.py --by-batch "$out/sweep.sqlite" "$out/traced/runs.csv" "$out"
-python3 summarize_batch.py "$out"
+python analyze_gpu_trace.py --by-batch "$out/sweep.sqlite" "$out/traced/runs.csv" "$out"
+python summarize_batch.py "$out"
 ```
 
-The plotting command writes PDF, editable SVG and PNG files. The performance figure shows median request times and five-run ranges on all three platforms, then the speedup and efficiency of using two GPUs. The confusion matrix retains all 100 cells, leaves zero counts blank and includes per-digit error rates. The query-partition figure uses the recorded workload dimensions. When the archived `results/figure-1-example.json` is available, it also regenerates the real five-neighbour voting example. Run the plotting command again after both `results/batch_sweep/timed/runs.csv` and `results/batch_repeat5/timed/runs.csv` exist to draw the six-size boxplots with every unprofiled observation.
+For the repeat, choose `out=results/batch_repeat5` and use `--repeats 5` for both ordinary and traced requests. Re-run plotting after both batch directories exist. Boxplots retain every ordinary observation. The initial session recorded another compute process on each GPU; the repeat recorded none. Report their absolute times separately.
 
-The trace commands require NVIDIA Nsight Systems with CUDA tracing. To repeat the six-size experiment with five timings and five separate traces per size, choose a fresh `out` and set both repeat counts to 5.
+For repeated 10,000-query requests with a resident reference, **2,048 per GPU** remains the practical batch choice. Its mean times were 55.97 and 34.45 ms in the two sessions; batch 5,000 gave 57.83 and 33.94 ms. The larger loss relative to either session's fastest mean was 1.52% at 2,048 versus 3.31% at 5,000. Peak tensor allocation was 3.19 versus 4.92 GiB per GPU. Both paired confidence intervals include zero; these observations do not establish an intrinsic speed advantage of 2,048 over 5,000. The main experiment uses batch 256 with per-request training uploads.
 
-## Measured results
+## Report and archive
 
-For 10,000 queries at batch 256 with per-request training uploads, median elapsed times were 19.946 s on one CPU thread, 114.77 ms on one H100 and 78.66 ms on two. Predictions matched on every image, with 9,688 correct.
-
-With the training set resident on both GPUs, the recommended batch was 2,048 queries per GPU. Across two timing sessions its mean stayed within 1.52% of the fastest mean in each session. Batch 5,000 led in the five-run repeat. The peak PyTorch tensor allocations at these settings were 3.19 and 4.92 GiB per GPU.
-
-The project code is released under the [MIT License](LICENSE). MNIST is downloaded separately through torchvision.
+The full submission additionally contains the ten-page PDF, editable XeLaTeX source, all raw evidence and a SHA-256 manifest. The PDF embeds its source ZIP. See `report/BUILD.md` in that package. With XeLaTeX installed, `python build_report.py` regenerates tables, compiles and verifies the package. The public repository contains code and reproduction instructions without the student cover page or MNIST data. Code is released under the MIT License.

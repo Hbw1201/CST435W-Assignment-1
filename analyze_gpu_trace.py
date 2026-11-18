@@ -41,7 +41,7 @@ def save(path, rows):
         writer.writerows(rows)
 
 
-def analyze(database, runfile, out, by_batch=False):
+def analyze(database, runfile, out, by_batch=False, segments=False):
     with runfile.open(newline="") as stream:
         runs = list(csv.DictReader(stream))
     with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True) as db:
@@ -61,11 +61,14 @@ def analyze(database, runfile, out, by_batch=False):
         if len(markers) != 2 * len(runs):
             raise ValueError(f"{len(markers)} main-thread markers for {len(runs)} jobs")
         rows = []
+        intervals = []
         for run, (_, start), (end, _) in zip(runs, markers[::2], markers[1::2]):
             count = int(run["gpu_count"])
             batch_field = {"batch": int(run["batch"])} if by_batch else {}
             devices = range(count)
             bounds = (global_pid, start, end)
+            identity = dict(placement=run["placement"], gpu_count=count,
+                            batch=int(run["batch"]), repeat=int(run["repeat"]))
             kernels = defaultdict(list)
             for device, a, b in db.execute(
                     "SELECT deviceId, start, end FROM CUPTI_ACTIVITY_KIND_KERNEL "
@@ -73,6 +76,10 @@ def analyze(database, runfile, out, by_batch=False):
                 if not start <= a < b <= end:
                     raise ValueError("A kernel crosses a job boundary")
                 kernels[device].append((a, b))
+                if segments:
+                    intervals.append(dict(identity, cuda_device=device, activity="Kernel",
+                                          start_ms=(a-start)/1e6, end_ms=(b-start)/1e6,
+                                          trace_wall_ms=(end-start)/1e6))
             if set(kernels) != set(devices):
                 raise ValueError("The active GPUs differ from the requested GPU count")
             copies = defaultdict(list)
@@ -83,6 +90,10 @@ def analyze(database, runfile, out, by_batch=False):
                 if not start <= a <= b <= end:
                     raise ValueError("A copy crosses a job boundary")
                 copies[device, kind].append((a, b, size))
+                if segments:
+                    intervals.append(dict(identity, cuda_device=device, activity=kind,
+                                          start_ms=(a-start)/1e6, end_ms=(b-start)/1e6,
+                                          trace_wall_ms=(end-start)/1e6))
             unions = {i: merged(kernels[i]) for i in devices}
             both = common_duration(unions[0], unions[1]) if count == 2 else None
             n = int(run["n_test"]) // count
@@ -121,6 +132,8 @@ def analyze(database, runfile, out, by_batch=False):
                             mean_h2d_copy_ms=fsum(r["h2d_copy_ms"] for r in group) / len(group)))
     save(out / "kernel_timeline.csv", rows)
     save(out / "kernel_summary.csv", summary)
+    if segments:
+        save(out / "segments.csv", intervals)
 
 
 if __name__ == "__main__":
@@ -129,5 +142,6 @@ if __name__ == "__main__":
     parser.add_argument("traced_runs", type=Path)
     parser.add_argument("output_directory", type=Path)
     parser.add_argument("--by-batch", action="store_true", help="Keep a separate group per batch size")
+    parser.add_argument("--segments", action="store_true", help="Export request-relative kernel and copy intervals")
     args = parser.parse_args()
-    analyze(args.database, args.traced_runs, args.output_directory, args.by_batch)
+    analyze(args.database, args.traced_runs, args.output_directory, args.by_batch, args.segments)
