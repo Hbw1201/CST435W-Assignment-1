@@ -1,0 +1,42 @@
+{
+  "completed_utc": "2026-11-16T01:34:24.003683+00:00",
+  "python": "3.10.12",
+  "torch": "2.3.0+cu121",
+  "torchvision": "0.18.0+cu121",
+  "cuda": "12.1",
+  "gpu_inventory": "index, name, memory.total [MiB], driver_version\n0, NVIDIA H100 80GB HBM3, 81559 MiB, 580.95.05\n1, NVIDIA H100 80GB HBM3, 81559 MiB, 580.95.05",
+  "historical_cpu100_match": true,
+  "archive_md5": {
+    "train-images-idx3-ubyte.gz": "f68b3c2dcbeaaa9fbdd348bbdeb94873",
+    "train-labels-idx1-ubyte.gz": "d53e105ee54ea40749a09fcbcd1e9432",
+    "t10k-images-idx3-ubyte.gz": "9fb629c4189551a2d022fa330f9573f3",
+    "t10k-labels-idx1-ubyte.gz": "ec29112dd5afa0611ce80d1b7f02629c"
+  },
+  "sizes": [
+    100,
+    1000,
+    10000
+  ],
+  "order": [
+    "cpu",
+    "gpu1",
+    "gpu2"
+  ],
+  "warmups_per_cell": 1,
+  "measured_per_cell": 5,
+  "comparison": "same-prefix, end-to-end wall time; host-ready FP64 to ordered host predictions",
+  "cpu_info": "CST435W | CPU topology on SSH target A100\nCaptured (Asia/Shanghai): 2026-11-16T08:50:21+08:00\nCPU model: Intel(R) Xeon(R) Platinum 8468V\nArchitecture: x86_64\nOnline sockets: 2\nOnline cores per socket: socket 0 = 48, socket 1 = 48\nTotal online physical cores (Linux topology): 96\nTotal online logical CPUs (hardware threads): 192\nThreads per core (online): 2 on 96 cores\nLogical CPUs configured (lscpu): 192\nOnline CPU list: 0-191\nSSH process affinity, logical CPUs: 192\nSSH process affinity, physical cores represented: 96\nSSH process affinity list: 0-191\nnproc (in this session): 192\nVisible cgroup CPU time quota: 44 CPU-equivalents\n\nSources: lscpu; lscpu --online --parse=CPU,CORE,SOCKET; sched_getaffinity; /proc/self/status; nproc; cgroup CPU quota files.\n",
+  "sources": {
+    "knn.py": "8ada2b7c36eefbc11a6c540304b8d4781cad6c6d1422b59786c22b4530fb9fea",
+    "classify.py": "da049caae429c420344a7f9129187423b570e04099a53ccea53331be1ab033a1",
+    "benchmark.py": "33f141ce950fba2f702c6cee9bcc0ba0695a64fffa2b5704681326046c5a4c71"
+  },
+  "csv_sha256": {
+    "confusion.csv": "aa389c9f9fdaca1e557124047ee3895a3fbe6a6544c544e3b401c8d893ae49dd",
+    "device_profile.csv": "21099aea7fbb733bd5b7be51985327e732cfba6e1489dba1df9d27c8a362eecd",
+    "predictions.csv": "a0c351fc3165bb15095d441b0921415246a14f310bd2a63ae9cddfead05cc734",
+    "runs.csv": "a5b03a3394046bfab133f84c0364c3b5def1fbf37c8c1f27d52b9bde7caf11f8",
+    "scaling.csv": "3a09e5d81e6492096ba9ae220120485e2797d7f88cbc4186650b92c49804cdbc",
+    "summary.csv": "efd8c34cf90a4657663adbdb500bb70c6a0ad8852da6d844116b85fa16592595"
+  }
+}

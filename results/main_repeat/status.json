@@ -1,0 +1,1 @@
+{"session": 3, "worker_pid": 1825906, "phase": "session_complete", "mode": "gpu2", "n_test": 10000, "run": 5, "warmup": 2, "size_position": 3, "mode_position": 3, "wall_s": 0.059418884, "requests": 45}

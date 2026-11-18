@@ -1,0 +1,21 @@
+{
+  "utc": "2026-11-16T02:25:12.446551+00:00",
+  "host": "measurement-host-A",
+  "python": "3.10.12",
+  "torch": "2.3.0+cu121",
+  "cuda": "12.1",
+  "cuda_visible_devices": null,
+  "cuda_devices": [
+    "NVIDIA H100 80GB HBM3",
+    "NVIDIA H100 80GB HBM3"
+  ],
+  "trace_markers": false,
+  "timer": "host inputs ready to CPU labels ready, perf_counter_ns",
+  "repeats": 8,
+  "reference_and_labels_bytes_per_gpu": 376800000,
+  "per_request_uploads_training_data": true,
+  "resident_recomputes_reference_norms": true,
+  "one_time_concurrent_placement_on_both_ms": 40.861128,
+  "input_order_matches_cpu": true,
+  "predictions_verified": 320000
+}

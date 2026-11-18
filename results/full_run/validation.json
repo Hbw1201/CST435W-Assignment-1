@@ -1,0 +1,91 @@
+{
+  "official_runs": 45,
+  "compared_prefix_rows": 11100,
+  "full_test_count": 10000,
+  "mismatches_across_modes": 0,
+  "recomputed_medians_sd_throughput_scaling": true,
+  "independent_integer_check_indices": [
+    0,
+    33,
+    99,
+    416,
+    833,
+    1249,
+    1666,
+    2083,
+    2499,
+    2916,
+    3333,
+    3749,
+    4166,
+    4582,
+    4999,
+    5416,
+    5832,
+    6249,
+    6666,
+    7082,
+    7499,
+    7915,
+    8332,
+    8749,
+    9165,
+    9582,
+    9999
+  ],
+  "independent_disagreements": 0,
+  "examples": [
+    {
+      "index": 0,
+      "truth": 7,
+      "prediction": 7,
+      "train_indices": [
+        53843,
+        38620,
+        16186,
+        27059,
+        47003
+      ],
+      "labels": [
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "squared_distances": [
+        457766,
+        630415,
+        744211,
+        747367,
+        800488
+      ]
+    },
+    {
+      "index": 33,
+      "truth": 4,
+      "prediction": 0,
+      "train_indices": [
+        16572,
+        49463,
+        8207,
+        15765,
+        46371
+      ],
+      "labels": [
+        4,
+        0,
+        4,
+        0,
+        0
+      ],
+      "squared_distances": [
+        1916317,
+        3170670,
+        3389837,
+        3599533,
+        3628033
+      ]
+    }
+  ]
+}

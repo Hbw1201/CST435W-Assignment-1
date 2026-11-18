@@ -1,0 +1,8 @@
+{
+  "torch": "2.3.0",
+  "torchvision": "0.18.0",
+  "numpy": "1.26.4",
+  "scipy": "1.12.0",
+  "matplotlib": "3.8.4",
+  "pynvml": "11.4.1"
+}

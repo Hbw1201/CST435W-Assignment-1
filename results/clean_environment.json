@@ -1,0 +1,345 @@
+{
+  "started_unix": 1795004994.936615,
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+  "python": "3.10.22 (main, Oct  6 2026, 02:05:33) [GCC 14.2.0]",
+  "isolation": "Fresh python:3.10-slim Linux container; CPU PyTorch wheels",
+  "image_digest": "sha256:6ff506466f8b1e981719b468cc0023b8ef000b983cdec0eafe119d01f379e31d",
+  "device": "CPU",
+  "system_site_packages": false,
+  "checks": [
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--upgrade",
+        "pip==26.0.1"
+      ],
+      "returncode": 0,
+      "output": "Collecting pip==26.0.1\n  Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)\n     \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.8/1.8 MB 3.6 MB/s eta 0:00:00\nInstalling collected packages: pip\n  Attempting uninstall: pip\n    Found existing installation: pip 23.0.1\n    Uninstalling pip-23.0.1:\n      Successfully uninstalled pip-23.0.1\nSuccessfully installed pip-26.0.1\nWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--timeout",
+        "30",
+        "--retries",
+        "2",
+        "torch==2.3.0",
+        "torchvision==0.18.0",
+        "--index-url",
+        "https://download.pytorch.org/whl/cpu"
+      ],
+      "returncode": 0,
+      "output": "Looking in indexes: https://download.pytorch.org/whl/cpu\nCollecting torch==2.3.0\n  Downloading https://download-r2.pytorch.org/whl/cpu/torch-2.3.0%2Bcpu-cp310-cp310-linux_x86_64.whl (190.4 MB)\n     \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 190.4/190.4 MB 16.7 MB/s  0:00:11\nCollecting torchvision==0.18.0\n  Downloading https://download-r2.pytorch.org/whl/cpu/torchvision-0.18.0%2Bcpu-cp310-cp310-linux_x86_64.whl (1.6 MB)\n     \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.6/1.6 MB 14.1 MB/s  0:00:00\nCollecting filelock (from torch==2.3.0)\n  Downloading filelock-4.1.0-py3-none-any.whl.metadata (2.0 kB)\nCollecting typing-extensions>=4.8.0 (from torch==2.3.0)\n  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nCollecting sympy (from torch==2.3.0)\n  Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)\nCollecting networkx (from torch==2.3.0)\n  Downloading networkx-3.4.2-py3-none-any.whl.metadata (6.3 kB)\nCollecting jinja2 (from torch==2.3.0)\n  Downloading https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)\nCollecting fsspec (from torch==2.3.0)\n  Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)\nCollecting numpy (from torchvision==0.18.0)\n  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)\nCollecting pillow!=8.3.*,>=5.3.0 (from torchvision==0.18.0)\n  Downloading pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)\nCollecting MarkupSafe>=2.0 (from jinja2->torch==2.3.0)\n  Downloading https://download.pytorch.org/whl/markupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)\nCollecting mpmath<1.4,>=1.1.0 (from sympy->torch==2.3.0)\n  Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)\nDownloading pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 6.9/6.9 MB 13.5 MB/s  0:00:00\nDownloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)\nDownloading filelock-4.1.0-py3-none-any.whl (133 kB)\nDownloading fsspec-2026.9.0-py3-none-any.whl (221 kB)\nDownloading https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl (134 kB)\nDownloading https://download.pytorch.org/whl/markupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (20 kB)\nDownloading networkx-3.4.2-py3-none-any.whl (1.7 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.7/1.7 MB 20.5 MB/s  0:00:00\nDownloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 16.8/16.8 MB 20.5 MB/s  0:00:00\nDownloading sympy-1.14.0-py3-none-any.whl (6.3 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 6.3/6.3 MB 18.6 MB/s  0:00:00\nDownloading mpmath-1.3.0-py3-none-any.whl (536 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 536.2/536.2 kB 11.0 MB/s  0:00:00\nInstalling collected packages: mpmath, typing-extensions, sympy, pillow, numpy, networkx, MarkupSafe, fsspec, filelock, jinja2, torch, torchvision\n\nSuccessfully installed MarkupSafe-3.0.3 filelock-4.1.0 fsspec-2026.9.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.4.2 numpy-2.2.6 pillow-12.3.0 sympy-1.14.0 torch-2.3.0+cpu torchvision-0.18.0+cpu typing-extensions-4.16.0\nWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n\n[notice] A new release of pip is available: 26.0.1 -> 26.3\n[notice] To update, run: pip install --upgrade pip\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--timeout",
+        "30",
+        "--retries",
+        "2",
+        "-r",
+        "requirements.txt"
+      ],
+      "returncode": 0,
+      "output": "Collecting numpy==1.26.4 (from -r requirements.txt (line 2))\n  Downloading numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)\nCollecting scipy==1.12.0 (from -r requirements.txt (line 3))\n  Downloading scipy-1.12.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)\nCollecting matplotlib==3.8.4 (from -r requirements.txt (line 4))\n  Downloading matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)\nCollecting nvidia-ml-py==12.535.133 (from -r requirements.txt (line 5))\n  Downloading nvidia_ml_py-12.535.133-py3-none-any.whl.metadata (8.6 kB)\nCollecting pypdf==5.9.0 (from -r requirements.txt (line 6))\n  Downloading pypdf-5.9.0-py3-none-any.whl.metadata (7.1 kB)\nCollecting contourpy>=1.0.1 (from matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.5 kB)\nCollecting cycler>=0.10 (from matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)\nCollecting fonttools>=4.22.0 (from matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading fonttools-4.65.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (125 kB)\nCollecting kiwisolver>=1.3.1 (from matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading kiwisolver-1.5.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (5.2 kB)\nRequirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.10/site-packages (from matplotlib==3.8.4->-r requirements.txt (line 4)) (26.3)\nRequirement already satisfied: pillow>=8 in /usr/local/lib/python3.10/site-packages (from matplotlib==3.8.4->-r requirements.txt (line 4)) (12.3.0)\nCollecting pyparsing>=2.3.1 (from matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)\nCollecting python-dateutil>=2.7 (from matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading python_dateutil-3.0.0-py2.py3-none-any.whl.metadata (8.2 kB)\nRequirement already satisfied: typing_extensions>=4.0 in /usr/local/lib/python3.10/site-packages (from pypdf==5.9.0->-r requirements.txt (line 6)) (4.16.0)\nCollecting six>=1.6 (from python-dateutil>=2.7->matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)\nCollecting tzdata (from python-dateutil>=2.7->matplotlib==3.8.4->-r requirements.txt (line 4))\n  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)\nDownloading numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.2 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 18.2/18.2 MB 17.0 MB/s  0:00:01\nDownloading scipy-1.12.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.4 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 38.4/38.4 MB 16.8 MB/s  0:00:02\nDownloading matplotlib-3.8.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.6 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 11.6/11.6 MB 18.3 MB/s  0:00:00\nDownloading nvidia_ml_py-12.535.133-py3-none-any.whl (37 kB)\nDownloading pypdf-5.9.0-py3-none-any.whl (313 kB)\nDownloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (325 kB)\nDownloading cycler-0.12.1-py3-none-any.whl (8.3 kB)\nDownloading fonttools-4.65.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.3 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 5.3/5.3 MB 16.0 MB/s  0:00:00\nDownloading kiwisolver-1.5.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 1.6/1.6 MB 26.6 MB/s  0:00:00\nDownloading pyparsing-3.3.3-py3-none-any.whl (126 kB)\nDownloading python_dateutil-3.0.0-py2.py3-none-any.whl (94 kB)\nDownloading six-1.17.0-py2.py3-none-any.whl (11 kB)\nDownloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)\nInstalling collected packages: nvidia-ml-py, tzdata, six, pypdf, pyparsing, numpy, kiwisolver, fonttools, cycler, scipy, python-dateutil, contourpy, matplotlib\n  Attempting uninstall: numpy\n    Found existing installation: numpy 2.2.6\n    Uninstalling numpy-2.2.6:\n      Successfully uninstalled numpy-2.2.6\n\nSuccessfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.65.0 kiwisolver-1.5.1 matplotlib-3.8.4 numpy-1.26.4 nvidia-ml-py-12.535.133 pyparsing-3.3.3 pypdf-5.9.0 python-dateutil-3.0.0 scipy-1.12.0 six-1.17.0 tzdata-2026.6\nWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n\n[notice] A new release of pip is available: 26.0.1 -> 26.3\n[notice] To update, run: pip install --upgrade pip\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "No broken requirements found.\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-c",
+        "from torchvision.datasets import MNIST; MNIST('data',train=True,download=True); MNIST('data',train=False,download=True)"
+      ],
+      "returncode": 0,
+      "output": "\n0.3%\n0.7%\n1.0%\n1.3%\n1.7%\n2.0%\n2.3%\n2.6%\n3.0%\n3.3%\n3.6%\n4.0%\n4.3%\n4.6%\n5.0%\n5.3%\n5.6%\n6.0%\n6.3%\n6.6%\n6.9%\n7.3%\n7.6%\n7.9%\n8.3%\n8.6%\n8.9%\n9.3%\n9.6%\n9.9%\n10.2%\n10.6%\n10.9%\n11.2%\n11.6%\n11.9%\n12.2%\n12.6%\n12.9%\n13.2%\n13.6%\n13.9%\n14.2%\n14.5%\n14.9%\n15.2%\n15.5%\n15.9%\n16.2%\n16.5%\n16.9%\n17.2%\n17.5%\n17.9%\n18.2%\n18.5%\n18.8%\n19.2%\n19.5%\n19.8%\n20.2%\n20.5%\n20.8%\n21.2%\n21.5%\n21.8%\n22.1%\n22.5%\n22.8%\n23.1%\n23.5%\n23.8%\n24.1%\n24.5%\n24.8%\n25.1%\n25.5%\n25.8%\n26.1%\n26.4%\n26.8%\n27.1%\n27.4%\n27.8%\n28.1%\n28.4%\n28.8%\n29.1%\n29.4%\n29.8%\n30.1%\n30.4%\n30.7%\n31.1%\n31.4%\n31.7%\n32.1%\n32.4%\n32.7%\n33.1%\n33.4%\n33.7%\n34.0%\n34.4%\n34.7%\n35.0%\n35.4%\n35.7%\n36.0%\n36.4%\n36.7%\n37.0%\n37.4%\n37.7%\n38.0%\n38.3%\n38.7%\n39.0%\n39.3%\n39.7%\n40.0%\n40.3%\n40.7%\n41.0%\n41.3%\n41.7%\n42.0%\n42.3%\n42.6%\n43.0%\n43.3%\n43.6%\n44.0%\n44.3%\n44.6%\n45.0%\n45.3%\n45.6%\n45.9%\n46.3%\n46.6%\n46.9%\n47.3%\n47.6%\n47.9%\n48.3%\n48.6%\n48.9%\n49.3%\n49.6%\n49.9%\n50.2%\n50.6%\n50.9%\n51.2%\n51.6%\n51.9%\n52.2%\n52.6%\n52.9%\n53.2%\n53.6%\n53.9%\n54.2%\n54.5%\n54.9%\n55.2%\n55.5%\n55.9%\n56.2%\n56.5%\n56.9%\n57.2%\n57.5%\n57.9%\n58.2%\n58.5%\n58.8%\n59.2%\n59.5%\n59.8%\n60.2%\n60.5%\n60.8%\n61.2%\n61.5%\n61.8%\n62.1%\n62.5%\n62.8%\n63.1%\n63.5%\n63.8%\n64.1%\n64.5%\n64.8%\n65.1%\n65.5%\n65.8%\n66.1%\n66.4%\n66.8%\n67.1%\n67.4%\n67.8%\n68.1%\n68.4%\n68.8%\n69.1%\n69.4%\n69.8%\n70.1%\n70.4%\n70.7%\n71.1%\n71.4%\n71.7%\n72.1%\n72.4%\n72.7%\n73.1%\n73.4%\n73.7%\n74.0%\n74.4%\n74.7%\n75.0%\n75.4%\n75.7%\n76.0%\n76.4%\n76.7%\n77.0%\n77.4%\n77.7%\n78.0%\n78.3%\n78.7%\n79.0%\n79.3%\n79.7%\n80.0%\n80.3%\n80.7%\n81.0%\n81.3%\n81.7%\n82.0%\n82.3%\n82.6%\n83.0%\n83.3%\n83.6%\n84.0%\n84.3%\n84.6%\n85.0%\n85.3%\n85.6%\n85.9%\n86.3%\n86.6%\n86.9%\n87.3%\n87.6%\n87.9%\n88.3%\n88.6%\n88.9%\n89.3%\n89.6%\n89.9%\n90.2%\n90.6%\n90.9%\n91.2%\n91.6%\n91.9%\n92.2%\n92.6%\n92.9%\n93.2%\n93.6%\n93.9%\n94.2%\n94.5%\n94.9%\n95.2%\n95.5%\n95.9%\n96.2%\n96.5%\n96.9%\n97.2%\n97.5%\n97.9%\n98.2%\n98.5%\n98.8%\n99.2%\n99.5%\n99.8%\n100.0%\n\n100.0%\n\n2.0%\n4.0%\n6.0%\n7.9%\n9.9%\n11.9%\n13.9%\n15.9%\n17.9%\n19.9%\n21.9%\n23.8%\n25.8%\n27.8%\n29.8%\n31.8%\n33.8%\n35.8%\n37.8%\n39.7%\n41.7%\n43.7%\n45.7%\n47.7%\n49.7%\n51.7%\n53.7%\n55.6%\n57.6%\n59.6%\n61.6%\n63.6%\n65.6%\n67.6%\n69.6%\n71.5%\n73.5%\n75.5%\n77.5%\n79.5%\n81.5%\n83.5%\n85.5%\n87.4%\n89.4%\n91.4%\n93.4%\n95.4%\n97.4%\n99.4%\n100.0%\n\n100.0%\nDownloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz\nFailed to download (trying next):\nHTTP Error 404: Not Found\n\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to data/MNIST/raw/train-images-idx3-ubyte.gz\nExtracting data/MNIST/raw/train-images-idx3-ubyte.gz to data/MNIST/raw\n\nDownloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz\nFailed to download (trying next):\nHTTP Error 404: Not Found\n\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to data/MNIST/raw/train-labels-idx1-ubyte.gz\nExtracting data/MNIST/raw/train-labels-idx1-ubyte.gz to data/MNIST/raw\n\nDownloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz\nFailed to download (trying next):\nHTTP Error 404: Not Found\n\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to data/MNIST/raw/t10k-images-idx3-ubyte.gz\nExtracting data/MNIST/raw/t10k-images-idx3-ubyte.gz to data/MNIST/raw\n\nDownloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz\nFailed to download (trying next):\nHTTP Error 404: Not Found\n\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz\nDownloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to data/MNIST/raw/t10k-labels-idx1-ubyte.gz\nExtracting data/MNIST/raw/t10k-labels-idx1-ubyte.gz to data/MNIST/raw\n\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "test_correctness.py",
+        "--cli",
+        "--out",
+        "clean_boundary.json"
+      ],
+      "returncode": 0,
+      "output": "{\"checks_passed\": 18, \"cuda_checked\": false, \"cli_checked\": true}\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "summarize_sessions.py",
+        "results/main_repeat"
+      ],
+      "returncode": 0,
+      "output": "{\n  \"timed_requests\": 135,\n  \"sessions\": 3,\n  \"repeats_per_cell\": 5,\n  \"schedule_verified\": true,\n  \"prediction_mismatches\": 0,\n  \"per_mode_position_counts\": [\n    5\n  ],\n  \"aggregation\": \"Mean and sample SD of session means; speedup is calculated within each session first\",\n  \"ci_method\": \"Two-sided Student t interval across sessions; df = sessions - 1\",\n  \"process_ids\": [\n    1825420,\n    1825636,\n    1825906\n  ],\n  \"board_samples\": 4950,\n  \"other_process_observations\": 0,\n  \"derived_sha256\": {\n    \"runs.csv\": \"43d4f9c628b8905fd1796ce65aff43ff698cc6d2ff935de921d8919d86ed9bca\",\n    \"session_summary.csv\": \"27fcbe505acbcafd96d9ab6ec34f01192230ea59246a3bffd48614566fea94ba\",\n    \"summary.csv\": \"67768860bb99d3fc8dee6759da2e70495bf039674fdff1a2ca5ecfd1495d63f9\",\n    \"session_scaling.csv\": \"3d7969a3c2cb9c54a5f9098496b6ecee8b312a104301d99dd87580d5d17a9bfb\",\n    \"scaling.csv\": \"f252a883146dd758a1ea49d2feb5226fc67884298bd38e038a3c1bfe76040e82\",\n    \"device_profile.csv\": \"dde528283c4344456de3e697f7088936febc8724fffb71d1e6271a60daadb1ca\",\n    \"monitoring_summary.csv\": \"e090109ea9ccf56fbbc0c16f52d17d62d8e3ad053bdc940687c52a1400738e0f\"\n  }\n}\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "verify_results.py",
+        "results/full_run"
+      ],
+      "returncode": 0,
+      "output": "{\"official_runs\": 45, \"compared_prefix_rows\": 11100, \"full_test_count\": 10000, \"mismatches_across_modes\": 0, \"recomputed_medians_sd_throughput_scaling\": true}\n"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "analyze_gpu_trace.py",
+        "results/trace_repeat/trace.sqlite",
+        "results/trace_repeat/traced/runs.csv",
+        "results/trace_repeat",
+        "--segments"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "plot_results.py",
+        "results/full_run",
+        "--out",
+        "clean_figures"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "plot_sessions.py",
+        "results/main_repeat",
+        "--trace",
+        "results/trace_repeat",
+        "--out",
+        "clean_figures"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/usr/local/bin/python",
+        "-c",
+        "import benchmark_sessions, sweep_batch, summarize_batch, build_report, pynvml; print(\"All entry points import\")"
+      ],
+      "returncode": 0,
+      "output": "All entry points import\n"
+    }
+  ],
+  "boundary": {
+    "seed": 435,
+    "cuda_checked": false,
+    "checks": [
+      {
+        "case": "equal_distance_at_cutoff",
+        "mode": "cpu",
+        "batch": 1,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "equal_distance_at_cutoff",
+        "mode": "cpu",
+        "batch": 7,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "equal_distance_at_cutoff",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "equal_vote_counts",
+        "mode": "cpu",
+        "batch": 1,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "equal_vote_counts",
+        "mode": "cpu",
+        "batch": 7,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "equal_vote_counts",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "extreme_raw_pixels",
+        "mode": "cpu",
+        "batch": 1,
+        "queries": 2,
+        "matched": true
+      },
+      {
+        "case": "extreme_raw_pixels",
+        "mode": "cpu",
+        "batch": 7,
+        "queries": 2,
+        "matched": true
+      },
+      {
+        "case": "extreme_raw_pixels",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 2,
+        "matched": true
+      },
+      {
+        "case": "partition_and_batch",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 1,
+        "matched": true
+      },
+      {
+        "case": "partition_and_batch",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 2,
+        "matched": true
+      },
+      {
+        "case": "partition_and_batch",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 255,
+        "matched": true
+      },
+      {
+        "case": "partition_and_batch",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 256,
+        "matched": true
+      },
+      {
+        "case": "partition_and_batch",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 257,
+        "matched": true
+      },
+      {
+        "case": "partition_and_batch",
+        "mode": "cpu",
+        "batch": 256,
+        "queries": 513,
+        "matched": true
+      }
+    ],
+    "cli_checks": [
+      {
+        "mode": "cpu",
+        "limit": 257,
+        "stdout": "index  true  predicted\n    0     7          7\n    1     2          2\n    2     1          1\n    3     0          0\n    4     4          4\n    5     1          1\n    6     4          4\n    7     9          9\n    8     5          5\n    9     9          9\ncpu: 252/257 correct; first-call wall 0.735220 s\n",
+        "first_ten_integer_match": true
+      },
+      {
+        "mode": "cpu",
+        "limit": 0,
+        "rejected": true
+      },
+      {
+        "mode": "cpu",
+        "limit": 10001,
+        "rejected": true
+      }
+    ],
+    "checks_passed": 18,
+    "oracle": "Direct int64 pixel differences, exhaustive distances and stable full sorting",
+    "max_mnist_distance": 50979600,
+    "max_mnist_key": 3058776059999,
+    "versions": {
+      "python": "3.10.22",
+      "torch": "2.3.0+cpu",
+      "numpy": "1.26.4"
+    },
+    "sources": {
+      "knn.py": "8ada2b7c36eefbc11a6c540304b8d4781cad6c6d1422b59786c22b4530fb9fea",
+      "classify.py": "da049caae429c420344a7f9129187423b570e04099a53ccea53331be1ab033a1",
+      "test_correctness.py": "580cde9a701a6dbed444fa415a1a6f05624cfa68665e6bb609b01dcda6c06617"
+    }
+  },
+  "freeze": [
+    "contourpy==1.3.2",
+    "cycler==0.12.1",
+    "filelock==4.1.0",
+    "fonttools==4.65.0",
+    "fsspec==2026.9.0",
+    "Jinja2==3.1.6",
+    "kiwisolver==1.5.1",
+    "MarkupSafe==3.0.3",
+    "matplotlib==3.8.4",
+    "mpmath==1.3.0",
+    "networkx==3.4.2",
+    "numpy==1.26.4",
+    "nvidia-ml-py==12.535.133",
+    "packaging==26.3",
+    "pillow==12.3.0",
+    "pyparsing==3.3.3",
+    "pypdf==5.9.0",
+    "python-dateutil==3.0.0",
+    "scipy==1.12.0",
+    "six==1.17.0",
+    "sympy==1.14.0",
+    "torch==2.3.0+cpu",
+    "torchvision==0.18.0+cpu",
+    "typing_extensions==4.16.0",
+    "tzdata==2026.6"
+  ],
+  "sources": {
+    "analyze_gpu_trace.py": "6bb82cdb3876019f16848537ee3a09c269ff67b03352c556d4535cee8d7e78da",
+    "benchmark.py": "33f141ce950fba2f702c6cee9bcc0ba0695a64fffa2b5704681326046c5a4c71",
+    "benchmark_sessions.py": "ac7c43859b8f84f743646523b8e56fe6d1d8dd128bb2102bebbf29976203e79b",
+    "build_report.py": "2e33e9aaa331f205f70225d7385456f042fb8741f3f0531bf19f77df2f039d92",
+    "classify.py": "da049caae429c420344a7f9129187423b570e04099a53ccea53331be1ab033a1",
+    "diagnose_gpu.py": "2aa24664daa332a842df408aed792890ed783116e781dd79282c105133c1e6e6",
+    "knn.py": "8ada2b7c36eefbc11a6c540304b8d4781cad6c6d1422b59786c22b4530fb9fea",
+    "plot_results.py": "339a2c6eff744775e065e128f434b9b4b4ce714d88c9457ed3cb4debcebe3627",
+    "plot_sessions.py": "edb2ed8818847c586ac21dadbc8efaf896f874366ea625559aa4a3ca0424a678",
+    "summarize_batch.py": "851949df2395483b93c1493794e3f2022b78406bb4bd9442fb7d85050638f504",
+    "summarize_sessions.py": "d55fa78d1d925caaef07b6f846ff2d984f07884a98f3e73a00fa86fab9f31679",
+    "sweep_batch.py": "0e8ffb18b932fdd4d4ed8afff75500957ec242786a6ea492ed61e40827137654",
+    "test_correctness.py": "580cde9a701a6dbed444fa415a1a6f05624cfa68665e6bb609b01dcda6c06617",
+    "verify_results.py": "0906f343a699e397411bfe664b35bd21e6f34f4454c3a22aa0afa7c0f4decbf9"
+  },
+  "requirements_sha256": "7928852d78b415b1c5c742f39f9443ad59237db339418df6b6e0a1d8b61400aa",
+  "completed_unix": 1795005066.8526263,
+  "status": "passed"
+}

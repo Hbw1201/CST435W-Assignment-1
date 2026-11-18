@@ -1,0 +1,28 @@
+{
+  "recorded_utc": "2026-11-16T01:16:04+00:00",
+  "python": "3.10.12",
+  "torch": "2.3.0+cu121",
+  "torchvision": "0.18.0+cu121",
+  "intraop_threads": 1,
+  "interop_threads": 1,
+  "affinity_logical_cpus": [
+    0
+  ],
+  "source_sha256": "8ada2b7c36eefbc11a6c540304b8d4781cad6c6d1422b59786c22b4530fb9fea",
+  "data_root": "<project>/data",
+  "first_test_index": 0,
+  "last_test_index": 99,
+  "warmup_wall_s": 0.346437846,
+  "prediction_match_all_repeats": true,
+  "clock": "perf_counter_ns wall time; process_time_ns process CPU time",
+  "time_scope": "Host FP64 inputs ready to CPU labels ready. Includes reference norms, distances, top-5, voting and batch concatenation. Disk I/O, input conversion, scoring and recording excluded.",
+  "amortized_ms_per_image": "Batch wall time / number of test images, in ms; not individual query latency.",
+  "memory_scope": "Peak Linux process RSS through all runs, including imports, loading, warm-up and reference tensors (MiB).",
+  "tie_rules": "Equal squared distance: smaller training index. Equal votes: smaller digit.",
+  "csv_sha256": {
+    "cpu_100.csv": "40aea3750fb95fa15cfe632553eeb398ba5e57907c31b248cc85a9be65c15b53",
+    "cpu_100_confusion.csv": "d496f86d49d3e184316a9aec7c8bdc8454e927bd32beb41e9395b197436c20ac",
+    "cpu_100_runs.csv": "dd24b9a0afbb904ad9ce805152f6e4f19b0a4a91f6a2b2e3ebee217c9dc82d09",
+    "cpu_100_summary.csv": "9821b671f4cd6b7ed3daea03b353e3edf962d498799f314b6b8d76b2719b812b"
+  }
+}

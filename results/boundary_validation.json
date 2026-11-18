@@ -1,0 +1,365 @@
+{
+  "seed": 435,
+  "cuda_checked": true,
+  "checks": [
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cpu",
+      "batch": 1,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cpu",
+      "batch": 7,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cuda:0",
+      "batch": 1,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cuda:0",
+      "batch": 7,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cuda:0",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cuda:1",
+      "batch": 1,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cuda:1",
+      "batch": 7,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_distance_at_cutoff",
+      "mode": "cuda:1",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cpu",
+      "batch": 1,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cpu",
+      "batch": 7,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cuda:0",
+      "batch": 1,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cuda:0",
+      "batch": 7,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cuda:0",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cuda:1",
+      "batch": 1,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cuda:1",
+      "batch": 7,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "equal_vote_counts",
+      "mode": "cuda:1",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cpu",
+      "batch": 1,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cpu",
+      "batch": 7,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cuda:0",
+      "batch": 1,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cuda:0",
+      "batch": 7,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cuda:0",
+      "batch": 256,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cuda:1",
+      "batch": 1,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cuda:1",
+      "batch": 7,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "extreme_raw_pixels",
+      "mode": "cuda:1",
+      "batch": 256,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu1",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu2",
+      "batch": 256,
+      "queries": 1,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu1",
+      "batch": 256,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu2",
+      "batch": 256,
+      "queries": 2,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 255,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu1",
+      "batch": 256,
+      "queries": 255,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu2",
+      "batch": 256,
+      "queries": 255,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 256,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu1",
+      "batch": 256,
+      "queries": 256,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu2",
+      "batch": 256,
+      "queries": 256,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 257,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu1",
+      "batch": 256,
+      "queries": 257,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu2",
+      "batch": 256,
+      "queries": 257,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "cpu",
+      "batch": 256,
+      "queries": 513,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu1",
+      "batch": 256,
+      "queries": 513,
+      "matched": true
+    },
+    {
+      "case": "partition_and_batch",
+      "mode": "gpu2",
+      "batch": 256,
+      "queries": 513,
+      "matched": true
+    }
+  ],
+  "cli_checks": [
+    {
+      "mode": "cpu",
+      "limit": 257,
+      "stdout": "index  true  predicted\n    0     7          7\n    1     2          2\n    2     1          1\n    3     0          0\n    4     4          4\n    5     1          1\n    6     4          4\n    7     9          9\n    8     5          5\n    9     9          9\ncpu: 252/257 correct; first-call wall 0.659273 s\n",
+      "first_ten_integer_match": true
+    },
+    {
+      "mode": "gpu1",
+      "limit": 257,
+      "stdout": "index  true  predicted\n    0     7          7\n    1     2          2\n    2     1          1\n    3     0          0\n    4     4          4\n    5     1          1\n    6     4          4\n    7     9          9\n    8     5          5\n    9     9          9\ngpu1: 252/257 correct; first-call wall 0.346372 s\n",
+      "first_ten_integer_match": true
+    },
+    {
+      "mode": "gpu2",
+      "limit": 257,
+      "stdout": "index  true  predicted\n    0     7          7\n    1     2          2\n    2     1          1\n    3     0          0\n    4     4          4\n    5     1          1\n    6     4          4\n    7     9          9\n    8     5          5\n    9     9          9\ngpu2: 252/257 correct; first-call wall 0.540632 s\n",
+      "first_ten_integer_match": true
+    },
+    {
+      "mode": "cpu",
+      "limit": 0,
+      "rejected": true
+    },
+    {
+      "mode": "cpu",
+      "limit": 10001,
+      "rejected": true
+    }
+  ],
+  "checks_passed": 50,
+  "oracle": "Direct int64 pixel differences, exhaustive distances and stable full sorting",
+  "max_mnist_distance": 50979600,
+  "max_mnist_key": 3058776059999,
+  "versions": {
+    "python": "3.10.12",
+    "torch": "2.3.0+cu121",
+    "numpy": "1.26.4"
+  },
+  "sources": {
+    "knn.py": "8ada2b7c36eefbc11a6c540304b8d4781cad6c6d1422b59786c22b4530fb9fea",
+    "classify.py": "da049caae429c420344a7f9129187423b570e04099a53ccea53331be1ab033a1",
+    "test_correctness.py": "580cde9a701a6dbed444fa415a1a6f05624cfa68665e6bb609b01dcda6c06617"
+  }
+}

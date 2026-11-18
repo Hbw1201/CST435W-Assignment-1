@@ -1,0 +1,2 @@
+mode,n_train,n_test,k,batch_size,dtype,cpu_compute_threads,gpu_count,measured_runs,warmup_runs,median_wall_s,mean_wall_s,sample_std_wall_s,min_wall_s,max_wall_s,throughput_at_median_images_s,amortized_ms_per_image,peak_process_rss_mib,correct_count,error_count,accuracy_pct
+cpu_1t,60000,100,5,256,float64,1,0,5,1,0.336509263,0.3359164826,0.002770131056656579,0.332454333,0.339771555,297.16863990160056,3.36509263,1259.2734375,99,1,99.0

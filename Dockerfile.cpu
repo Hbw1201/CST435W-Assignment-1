@@ -1,0 +1,8 @@
+FROM python:3.10-slim@sha256:6ff506466f8b1e981719b468cc0023b8ef000b983cdec0eafe119d01f379e31d
+COPY requirements.txt /tmp/requirements.txt
+RUN python -m pip install --no-cache-dir --upgrade pip==26.0.1 \
+ && python -m pip install --no-cache-dir torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cpu \
+ && python -m pip install --no-cache-dir -r /tmp/requirements.txt \
+ && python -m pip check
+WORKDIR /work
+ENV PYTHONDONTWRITEBYTECODE=1

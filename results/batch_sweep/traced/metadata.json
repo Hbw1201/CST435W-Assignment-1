@@ -1,0 +1,44 @@
+{
+  "utc": "2026-11-16T02:52:56.760381+00:00",
+  "host": "measurement-host-A",
+  "python": "3.10.12",
+  "torch": "2.3.0+cu121",
+  "cuda": "12.1",
+  "driver": "580.95.05",
+  "cuda_visible_devices": null,
+  "cuda_devices": [
+    "NVIDIA H100 80GB HBM3",
+    "NVIDIA H100 80GB HBM3"
+  ],
+  "batches": [
+    256,
+    512,
+    1024,
+    2048,
+    4096,
+    5000
+  ],
+  "repeats": 12,
+  "warmups_per_batch": 2,
+  "order_seed": 435,
+  "first_round_order": [
+    1024,
+    256,
+    5000,
+    2048,
+    4096,
+    512
+  ],
+  "trace_markers": true,
+  "training_bytes_resident_per_gpu": 376800000,
+  "reference_setup_ms_including_first_device_use": 793.458415,
+  "n_test": 10000,
+  "predictions_verified": 720000,
+  "correct_per_request": 9688,
+  "source_sha256": {
+    "sweep_batch.py": "0e8ffb18b932fdd4d4ed8afff75500957ec242786a6ea492ed61e40827137654",
+    "diagnose_gpu.py": "2aa24664daa332a842df408aed792890ed783116e781dd79282c105133c1e6e6",
+    "classify.py": "da049caae429c420344a7f9129187423b570e04099a53ccea53331be1ab033a1",
+    "knn.py": "8ada2b7c36eefbc11a6c540304b8d4781cad6c6d1422b59786c22b4530fb9fea"
+  }
+}

@@ -1,0 +1,7 @@
+# Preserve the bytes pinned by experiment SHA-256 records on every OS.
+*.py -text
+results/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+*.sqlite binary
+*.png binary
+# Recorded Matplotlib SVG paths intentionally contain separator whitespace.
+results/**/*.svg -whitespace

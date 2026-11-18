@@ -1,0 +1,28 @@
+{
+  "timed_requests": 135,
+  "sessions": 3,
+  "repeats_per_cell": 5,
+  "schedule_verified": true,
+  "prediction_mismatches": 0,
+  "per_mode_position_counts": [
+    5
+  ],
+  "aggregation": "Mean and sample SD of session means; speedup is calculated within each session first",
+  "ci_method": "Two-sided Student t interval across sessions; df = sessions - 1",
+  "process_ids": [
+    1825420,
+    1825636,
+    1825906
+  ],
+  "board_samples": 4950,
+  "other_process_observations": 0,
+  "derived_sha256": {
+    "runs.csv": "43d4f9c628b8905fd1796ce65aff43ff698cc6d2ff935de921d8919d86ed9bca",
+    "session_summary.csv": "27fcbe505acbcafd96d9ab6ec34f01192230ea59246a3bffd48614566fea94ba",
+    "summary.csv": "67768860bb99d3fc8dee6759da2e70495bf039674fdff1a2ca5ecfd1495d63f9",
+    "session_scaling.csv": "3d7969a3c2cb9c54a5f9098496b6ecee8b312a104301d99dd87580d5d17a9bfb",
+    "scaling.csv": "f252a883146dd758a1ea49d2feb5226fc67884298bd38e038a3c1bfe76040e82",
+    "device_profile.csv": "dde528283c4344456de3e697f7088936febc8724fffb71d1e6271a60daadb1ca",
+    "monitoring_summary.csv": "e090109ea9ccf56fbbc0c16f52d17d62d8e3ad053bdc940687c52a1400738e0f"
+  }
+}

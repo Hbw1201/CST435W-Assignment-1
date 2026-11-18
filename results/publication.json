@@ -1,0 +1,241 @@
+{
+  "description": "Public experiment records; measurement values preserved.",
+  "modified_files": [
+    {
+      "path": "results/batch_repeat5/sweep.sqlite",
+      "original_sha256": "ecc1519e8ffbb39885c5eb289d1dc8fd0390b48b383ba0ad1b69b4f2fd5a1219",
+      "published_sha256": "84752e6885d8f1f164392c3b20ce33d8857b0c12a57e59fc8205fcdf5b5128b0",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/batch_repeat5/timed/metadata.json",
+      "original_sha256": "bdc7554448ed33f5948a5be52274856feb1f01e0826a9e87f8c14ac66d85b657",
+      "published_sha256": "ce386452be231217ec8c876668db0a209f40ba27b3e4b4c6ee169e227c73c67e",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/batch_repeat5/traced/metadata.json",
+      "original_sha256": "6e5ee92244195aa7834ee9b3187aac6686db1ffb3f712ee335d99eedd10a556e",
+      "published_sha256": "265c0f715d248b3bbe5b2344d078e20490b9e5cb1022e067fe43c4f03d743690",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/batch_sweep/README.md",
+      "original_sha256": "d8092717cda6e17f9b785bc35f4cfad4c259aa4f36298af57f9137cca56dd177",
+      "published_sha256": "fe13687472e2cc089b7d77768e31d16b84aa124d1f6c166dc1a431043f5bc242",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/batch_sweep/sweep.sqlite",
+      "original_sha256": "caf95c55d120384e6f5c58a0a45b7e728f4fddd4facad92bfdc952fb981ecfeb",
+      "published_sha256": "2a8a3aa858ed8094815a082e448539a8d5f1ab5f150aa890ce5d1b737548c2da",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/batch_sweep/timed/metadata.json",
+      "original_sha256": "fb9db38996ba43248af57965e07ebd336291bf9fe17f571e8dbe48be46c20b13",
+      "published_sha256": "402af587273da2d69c925dbba9e10a19efa1e8b49dcf08c28b0d527aca2fd3ed",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/batch_sweep/traced/metadata.json",
+      "original_sha256": "ed47a2c3d72cd69b80c867b90d3424810c5d230617de7677de7f3cc055423e2a",
+      "published_sha256": "4502bbe73f148bdc853d7759bc7513a0f74ea9ecad31efe8f45b4f62260e1133",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/cpu_100_metadata.json",
+      "original_sha256": "3b7dafd10b13ab9efc492b532373e759feef549d9303b899e0eaa2c67d9c8053",
+      "published_sha256": "b16a635cf15c7f49d0c26216c29b3c6178ae37a255730b2bd664521a802ae14a",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/gpu_diagnosis/knn_sync.sqlite",
+      "original_sha256": "ee0d91338b72b74eff246f3bab5587c197da4f2f130089ed19daaa34e3b401ea",
+      "published_sha256": "1ab5cb5831e9e49bb7ffdf2f5321237b336d0efd3e547f8e245c6b5881d721cd",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/gpu_diagnosis/timed/metadata.json",
+      "original_sha256": "1cde3b2c83559eed486b127f6fd602d16e150030ad64429983c28ba586326388",
+      "published_sha256": "daf15bf98a02a88e44b069c7227030af372dd3763fa982a650d28fddbaf3062e",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/gpu_diagnosis/trace_sync/metadata.json",
+      "original_sha256": "5eda459f86409383ce4d42698c29a6c501fe133e70c2267a51d329d94b031651",
+      "published_sha256": "b34044656437340851789f2c8e3b5f484c3305e62d289dc5dab5bb98e0503246",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/main_repeat/environment.json",
+      "original_sha256": "4fd95cfc80d2042c8317ae742d2f0bfa9b7f2fe59f012307c7c1e200d7522b53",
+      "published_sha256": "a1eae8f2251362256eb7408aa9ebcdf9e46bcb2525948105dae1f144252cf49d",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/trace_repeat/trace.sqlite",
+      "original_sha256": "ce1c15cfa24997e240d72b66d5e69a58aefafd920fe7aa800fd22b8dfa86315f",
+      "published_sha256": "75a7c29ef334d93d445ac0df80bd06066df58757d03fac6155bf31f1698fad36",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    },
+    {
+      "path": "results/trace_repeat/traced/metadata.json",
+      "original_sha256": "62f254adb33b121dfba84b53fe424c40699bc129b80ee2de74c0b47b0609f692",
+      "published_sha256": "d95c1081ad786a1838cd0c9fe420fb28c6806cae5ea2be871fb1809543894e59",
+      "change": "Removed machine/environment metadata and replaced private host/path labels; no measured values changed."
+    }
+  ],
+  "private_native_traces": [
+    {
+      "path": "results/batch_repeat5/sweep.nsys-rep",
+      "sha256": "3411e8dba65f01ebf1d8af8946275813b9e33dd729364fbecce6f2a57335bf22",
+      "reason": "Native captures retained in the local submission; public SQLite copies provide the recorded CUDA events without machine/environment metadata."
+    },
+    {
+      "path": "results/batch_sweep/sweep.nsys-rep",
+      "sha256": "dab9f0c6eace537214ba282c049aa3ed84ebe6307282f94548b61a08b66fc9a3",
+      "reason": "Native captures retained in the local submission; public SQLite copies provide the recorded CUDA events without machine/environment metadata."
+    },
+    {
+      "path": "results/gpu_diagnosis/knn_sync.nsys-rep",
+      "sha256": "ba6fc2f0ba226950fbf111b9dfc94382a90b5521afb1bff8d9077e1b231a260f",
+      "reason": "Native captures retained in the local submission; public SQLite copies provide the recorded CUDA events without machine/environment metadata."
+    },
+    {
+      "path": "results/trace_repeat/trace.nsys-rep",
+      "sha256": "b3bce57f96646fa278dacf92ed8d64ef162b2059acce723d3a5d90fd953617dd",
+      "reason": "Native captures retained in the local submission; public SQLite copies provide the recorded CUDA events without machine/environment metadata."
+    }
+  ],
+  "trace_event_checks": [
+    {
+      "path": "results/batch_repeat5/sweep.sqlite",
+      "preserved_tables": {
+        "CUPTI_ACTIVITY_KIND_RUNTIME": {
+          "rows": 23119,
+          "row_values_sha256": "67bfea5c94bd03f3a17f8d52448d059e092c1f4553251662074777968871a0e8"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMCPY": {
+          "rows": 186,
+          "row_values_sha256": "109a9c3de7a81564515d2e50195a4e350b0c244607ecbef1b0d3c60f0507b60c"
+        },
+        "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION": {
+          "rows": 318,
+          "row_values_sha256": "4d559ddfd7d712f83152057fa794987d4e6fbf6bfd4159699c5b0214ae0fa0ef"
+        },
+        "CUPTI_ACTIVITY_KIND_KERNEL": {
+          "rows": 20468,
+          "row_values_sha256": "e4e696877b5c35ff95a3805b05a72e355e6f6ab0da36b5772b49a80e4d11fc25"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMSET": {
+          "rows": 1148,
+          "row_values_sha256": "8f37957e13e21666a76b21f0dfd6f8b7a97915dda413069ef48cefce2eed8094"
+        }
+      },
+      "removed_metadata_rows": {
+        "ANALYSIS_FILE": 2,
+        "TARGET_INFO_SYSTEM_ENV": 85,
+        "TARGET_INFO_NIC_INFO": 9,
+        "META_DATA_CAPTURE": 93,
+        "META_DATA_EXPORT": 29
+      }
+    },
+    {
+      "path": "results/batch_sweep/sweep.sqlite",
+      "preserved_tables": {
+        "CUPTI_ACTIVITY_KIND_RUNTIME": {
+          "rows": 45253,
+          "row_values_sha256": "c92a74fbc391a6fe52f05deddd30a27ae7c05aa55bf09481d5ad874439b9a8d9"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMCPY": {
+          "rows": 368,
+          "row_values_sha256": "ed4b1709d453b5024e27f7db20f37c1a803382762a1f3744fcd83c038e711934"
+        },
+        "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION": {
+          "rows": 654,
+          "row_values_sha256": "41841fb76adb5254c58bfe71a99afc78ab85c39947efb5361f091bfeff5ef958"
+        },
+        "CUPTI_ACTIVITY_KIND_KERNEL": {
+          "rows": 40936,
+          "row_values_sha256": "bf7218195cb7af52298a64482400822c9ea3f37e316919111a69248324a0fabb"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMSET": {
+          "rows": 2296,
+          "row_values_sha256": "df377a5262387d7712db0f11fa71e7a35544a7345a200712c0b1c1a50a811881"
+        }
+      },
+      "removed_metadata_rows": {
+        "ANALYSIS_FILE": 2,
+        "TARGET_INFO_SYSTEM_ENV": 85,
+        "TARGET_INFO_NIC_INFO": 9,
+        "META_DATA_CAPTURE": 93,
+        "META_DATA_EXPORT": 29
+      }
+    },
+    {
+      "path": "results/gpu_diagnosis/knn_sync.sqlite",
+      "preserved_tables": {
+        "CUPTI_ACTIVITY_KIND_RUNTIME": {
+          "rows": 24921,
+          "row_values_sha256": "3bfabc5e9567936c65a4bf3a0f9ddb18bf0499e5d64baa64170827ec950d1a99"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMCPY": {
+          "rows": 76,
+          "row_values_sha256": "643ec88fa8b3a4b816fe00972da5b79f97e391e190ed7ecc864ebdec31881fbc"
+        },
+        "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION": {
+          "rows": 126,
+          "row_values_sha256": "a6cf6b9824c9a4a8a9966c3d6a5df17b9da1bbb8b971dde947d3f36dc4e0c758"
+        },
+        "CUPTI_ACTIVITY_KIND_KERNEL": {
+          "rows": 22496,
+          "row_values_sha256": "cdf39f5170eef2c29a0320856d3fdcaf356be6d59c1d6a0703fd832cf0017aca"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMSET": {
+          "rows": 1288,
+          "row_values_sha256": "96d9d7794d91a9fcb59eb9987d35a9cd9e138ba95d877c2d8e39b394124d8aee"
+        }
+      },
+      "removed_metadata_rows": {
+        "ANALYSIS_FILE": 2,
+        "TARGET_INFO_SYSTEM_ENV": 85,
+        "TARGET_INFO_NIC_INFO": 9,
+        "META_DATA_CAPTURE": 93,
+        "META_DATA_EXPORT": 29
+      }
+    },
+    {
+      "path": "results/trace_repeat/trace.sqlite",
+      "preserved_tables": {
+        "CUPTI_ACTIVITY_KIND_RUNTIME": {
+          "rows": 24921,
+          "row_values_sha256": "d15c19c11704a2b2f6922ac78c0d2dc3b5a22268a98037c6641277464893d433"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMCPY": {
+          "rows": 76,
+          "row_values_sha256": "77a59cf7b784827a7d7b1710a319be8ad9c94cbb8adc0390785b60bc7dbaaced"
+        },
+        "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION": {
+          "rows": 126,
+          "row_values_sha256": "e15c88505b67aef7426592cbae44c8d0dfcd81bbbe86e01b9b52eb1139211fb2"
+        },
+        "CUPTI_ACTIVITY_KIND_KERNEL": {
+          "rows": 22496,
+          "row_values_sha256": "0481d914a7394ac4c869d4aa0903f7151c7dfc4204e7ef2f324d15f09ba8c1ef"
+        },
+        "CUPTI_ACTIVITY_KIND_MEMSET": {
+          "rows": 1288,
+          "row_values_sha256": "ca3430a9bda29d35ad4620169ca661ad2d8805877b600007748495a52081ce8c"
+        }
+      },
+      "removed_metadata_rows": {
+        "ANALYSIS_FILE": 2,
+        "TARGET_INFO_SYSTEM_ENV": 85,
+        "TARGET_INFO_NIC_INFO": 9,
+        "META_DATA_CAPTURE": 93,
+        "META_DATA_EXPORT": 29
+      }
+    }
+  ]
+}

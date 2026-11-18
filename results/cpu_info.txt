@@ -1,0 +1,18 @@
+CST435W | CPU topology on SSH target A100
+Captured (Asia/Shanghai): 2026-11-16T08:50:21+08:00
+CPU model: Intel(R) Xeon(R) Platinum 8468V
+Architecture: x86_64
+Online sockets: 2
+Online cores per socket: socket 0 = 48, socket 1 = 48
+Total online physical cores (Linux topology): 96
+Total online logical CPUs (hardware threads): 192
+Threads per core (online): 2 on 96 cores
+Logical CPUs configured (lscpu): 192
+Online CPU list: 0-191
+SSH process affinity, logical CPUs: 192
+SSH process affinity, physical cores represented: 96
+SSH process affinity list: 0-191
+nproc (in this session): 192
+Visible cgroup CPU time quota: 44 CPU-equivalents
+
+Sources: lscpu; lscpu --online --parse=CPU,CORE,SOCKET; sched_getaffinity; /proc/self/status; nproc; cgroup CPU quota files.
