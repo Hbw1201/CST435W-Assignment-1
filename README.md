@@ -1,10 +1,10 @@
 # CST435W Assignment 1
 
-Exact five-nearest-neighbour classification of MNIST on one CPU thread, one H100, and two H100s on the same Linux host. Every mode searches all 60,000 training images. GPU workers replicate the reference, split queries, and return labels in input order.
+This project compares exact five-nearest-neighbour classification of MNIST on one CPU thread, one H100 and two H100s on the same Linux host. Every mode searches all 60,000 training images. Each GPU worker holds a copy of the reference and processes its share of the queries. The host returns labels in input order.
 
 ## Check the recorded results without the server
 
-The [experiment archive](results/README.md) now includes raw timings, ordered predictions, confusion counts, monitoring samples, per-session metadata and CUDA event data. The reported results can be checked locally without an H100 or an SSH connection:
+The [experiment archive](results/README.md) contains raw timings, ordered predictions, confusion counts, monitoring samples, per-session metadata and CUDA event data. You can check the reported results locally without an H100 or an SSH connection:
 
 ```bash
 python verify_archive.py
@@ -12,13 +12,13 @@ python verify_archive.py
 python reproduce_results.py --out reproduced
 ```
 
-`verify_archive.py` needs only standard Python. The second command rebuilds statistics and all five report figures in a new folder, checks them against the archive, and preserves the recorded files. It uses the SQLite traces directly; Nsight Systems is needed only to capture new GPU activity. See the [data map and publication notes](results/README.md) for file definitions and metadata redactions.
+`verify_archive.py` needs only standard Python. The second command rebuilds statistics and all five report figures in a new folder and checks them against the archive. Recorded files stay unchanged. It reads the SQLite traces directly; Nsight Systems is needed only to capture new GPU activity. The [data map and publication notes](results/README.md) explain the files and metadata redactions.
 
-To prepare a local Linux CPU runtime with Docker, run `docker build -f Dockerfile.cpu -t cst435w-cpu .`. After the image is installed, checks and figure rebuilding work with Docker networking disabled. Measuring new H100 timings still needs suitable GPUs. Reading the PDF and reviewing or recomputing the archived results does not depend on the original server staying online.
+To prepare a local Linux CPU runtime, run `docker build -f Dockerfile.cpu -t cst435w-cpu .`. Once the image is installed, Docker can check results and rebuild figures with networking disabled. The PDF and archived results remain usable when the original server is offline. New H100 measurements require suitable GPUs.
 
 ## Installation
 
-Use Python 3.10. The measurement host used torch 2.3.0+cu121, torchvision 0.18.0+cu121, NumPy 1.26.4, SciPy 1.12.0 and Matplotlib 3.8.4. Install the matching PyTorch pair first, then the shared requirements, including the NVML monitoring binding and pypdf report dependency.
+Use Python 3.10. The measurement host used torch 2.3.0+cu121, torchvision 0.18.0+cu121, NumPy 1.26.4, SciPy 1.12.0 and Matplotlib 3.8.4. Install the matching PyTorch pair first, followed by the shared requirements. These include the NVML binding for monitoring and pypdf for the report.
 
 ```bash
 python3 -m venv .venv
@@ -32,7 +32,7 @@ python -c "from torchvision.datasets import MNIST; MNIST('data', train=True, dow
 
 For CPU-only checks, replace `cu121` with `cpu` in the wheel URL. GPU experiments need two visible CUDA devices and a compatible NVIDIA driver. Some Linux installations need their Python `venv` package installed first. Use an isolated environment without system site packages.
 
-The full submission records a clean CPU installation in a fresh Linux container, including dependency checks, 18 correctness/CLI checks, statistics verification, trace parsing and figure regeneration. The 50 CPU/GPU checks ran on the measurement server. These are separate validation scopes; the clean CPU environment does not claim to reproduce H100 timings.
+The full submission records an installation check in a fresh Linux CPU container. Dependency checks, 18 correctness/CLI checks, statistics verification, trace parsing and figure regeneration passed there. The 50 CPU/GPU checks ran on the measurement server. The container check covers installation and correctness; reproducing H100 timings requires GPU hardware.
 
 ## Run and check the classifier
 
@@ -44,13 +44,13 @@ python test_correctness.py --cli
 python test_correctness.py --cuda --cli --out results/my_boundary_check.json
 ```
 
-The CLI prints ten zero-based test indices, true and predicted labels, the correct count and first-call wall time. Raw 0–255 pixels become FP64 vectors. Squared distances and training indices determine the five nearest neighbours; tied votes favour the smaller digit. The supported prefix is 1–10,000 queries.
+The CLI prints ten zero-based test indices with true and predicted labels, followed by the number of correct predictions and first-call wall time. Raw pixel values from 0 to 255 become FP64 vectors. Squared distances and training indices determine the five nearest neighbours; tied votes favour the smaller digit. The classifier accepts the first 1 to 10,000 queries.
 
-The independent oracle uses direct int64 pixel differences and stable full sorting. Tests cover distance ties at the fifth neighbour, tied votes, extreme pixels, one-query and odd splits, batch boundaries at 255/256/257/513, actual CLI output and invalid limits. There are 50 checks with `--cuda --cli`, or 18 with `--cli` alone.
+An independent oracle computes direct int64 pixel differences and uses stable full sorting. Tests cover distance ties at the fifth neighbour, tied votes, extreme pixels, one-query and odd splits, batch boundaries at 255/256/257/513, CLI output and invalid limits. Running with `--cuda --cli` performs 50 checks; `--cli` alone performs 18.
 
 ## Three-session main experiment
 
-Run from the project root and choose fresh output paths. Measurement commands refuse to overwrite an experiment.
+Run from the project root with new output paths. The measurement commands refuse to overwrite existing experiments.
 
 ```bash
 python benchmark_sessions.py --out results/new_main_repeat
@@ -58,11 +58,11 @@ python summarize_sessions.py results/new_main_repeat
 python test_correctness.py --cuda --cli --out results/new_boundary_validation.json
 ```
 
-Three fresh worker processes each load the data once, warm every condition twice, then interleave five requests per size/mode: 135 measured requests in total. Sizes are 100, 1,000 and 10,000 queries; modes are CPU, one GPU and two GPUs. Seed 435 sets the starting orders, which rotate and reverse across rounds. Across all sessions, each mode occupies each order position five times per size.
+Each of three fresh worker processes loads the data once, warms every condition twice, then interleaves five requests per size/mode, for 135 measured requests in total. The experiment uses 100, 1,000 and 10,000 queries on the CPU, one GPU and two GPUs. Seed 435 sets the starting orders, which rotate and reverse across rounds. Across all sessions, each mode occupies each order position five times per size.
 
-K=5, FP64, all 60,000 references, and batch 256 are fixed. Both PyTorch CPU thread counts are one. The main thread is pinned to one available CPU for serial work; its original affinity is restored for GPU work. A separate controller samples temperatures, clocks, board load and competing processes every 0.2 seconds.
+All conditions use K=5, FP64, all 60,000 references and batch 256. Both PyTorch CPU thread counts are one. The main thread is pinned to one available CPU during serial work and regains its original affinity for GPU work. A separate controller samples temperatures, clocks, board load and competing processes every 0.2 seconds.
 
-Timing starts with host tensors ready and ends with ordered labels on the CPU. It includes reference/query uploads, classification, return and joining. Loading, conversion, validation and logging are outside the interval. CUDA-event passes are separate from ordinary timings.
+Timing starts with tensors ready on the host and ends with ordered labels on the CPU. It includes reference/query uploads, classification, return and joining. Loading, conversion, validation and logging occur outside this interval. CUDA-event passes are collected separately from ordinary timings.
 
 | Evidence | Contents |
 |---|---|
@@ -71,16 +71,16 @@ Timing starts with host tensors ready and ends with ordered labels on the CPU. I
 | `summary.csv` | Mean and sample SD of three session means; approximate 95% Student t intervals, 2 degrees of freedom. |
 | `session_scaling.csv`, `scaling.csv` | Ratios of means within each session, then summaries across sessions. Two-GPU efficiency is speedup divided by two. |
 | `boards.csv`, `monitoring_summary.csv` | Timestamped load, temperatures, clocks and competing-process observations. |
-| `session_01/`–`session_03/` | Original timings, ordered predictions, confusion counts, separate event profiles, per-condition records and hashes. |
+| `session_01/` through `session_03/` | Original timings, ordered predictions, confusion counts, separate event profiles, per-condition records and hashes. |
 | `schedule.csv`, `environment.json`, `validation.json` | Planned order, hardware/software, input/source hashes, agreement and statistics checks. |
 
-Process RSS is a session-lifetime high-water mark, not an isolated allocation per condition. Seeing no competing process in the samples does not establish exclusive hardware access.
+Process RSS records the high-water mark over the session's lifetime, so it cannot isolate allocations for each condition. An absence of competing processes in the samples does not establish exclusive hardware access.
 
-At 10,000 queries, mean ± SD across sessions was **20.066 ± 0.059 s** on the CPU, **120.36 ± 2.18 ms** on one H100 and **83.24 ± 1.38 ms** on two. Mean two-GPU speedup was **1.446** (approximate 95% interval **1.408–1.484**), with 72.3% efficiency. All labels agreed; accuracy was 96.88%. At 100 queries the speedup interval includes parity. The three sessions share one host and date.
+At 10,000 queries, mean ± SD across sessions was 20.066 ± 0.059 s on the CPU, 120.36 ± 2.18 ms on one H100 and 83.24 ± 1.38 ms on two. Mean two-GPU speedup was 1.446 (approximate 95% interval 1.408 to 1.484), with 72.3% efficiency. All labels agreed, and accuracy was 96.88%. At 100 queries, the speedup interval includes parity. All three sessions ran on one host and date.
 
 ## CUDA timeline and figures
 
-The placement and batch tools use the serial reference in `results/full_run/predictions.csv`, which is now included in the repository. To re-parse and plot the archived traces, use `reproduce_results.py`. The following commands capture a new trace on a CUDA host and keep it separate from the recorded trace:
+The placement and batch tools use the serial reference in `results/full_run/predictions.csv`, included in the repository. Use `reproduce_results.py` to parse and plot the archived traces. To capture a new trace on a CUDA host, run the commands below; they save it separately from the recorded trace:
 
 ```bash
 python verify_results.py results/full_run
@@ -93,9 +93,9 @@ python analyze_gpu_trace.py "$out/trace.sqlite" "$out/traced/runs.csv" "$out" --
 python plot_sessions.py results/main_repeat --trace "$out" --out figures/new_trace
 ```
 
-Tracing needs NVIDIA Nsight Systems. `plot_sessions.py` produces the primary `performance-sessions` figure as PDF, SVG and PNG. It shows session means, within-session speedups with intervals, and the second separately traced request at batch 256. Trace durations are excluded from ordinary timing statistics. The trace parser checks process/device identity, request boundaries and actual transfer bytes. Simultaneous kernels do not measure SM occupancy or bandwidth saturation.
+Collecting new traces requires NVIDIA Nsight Systems. `plot_sessions.py` exports the primary `performance-sessions` figure as PDF, SVG and PNG. It shows session means, within-session speedups with intervals, and the second separately traced request at batch 256. Ordinary timing statistics exclude trace durations. The parser checks process/device identity, request boundaries and transfer bytes. Simultaneous kernels do not measure SM occupancy or bandwidth saturation.
 
-`plot_results.py` retains the historical performance figure, full confusion matrix, query-partition diagram and batch boxplots. The real-neighbour figure uses the included `results/figure-1-example.json`. Figures use the requested five-colour palette at 162 mm width.
+`plot_results.py` produces the historical performance figure, full confusion matrix, query-partition diagram and batch boxplots. The real-neighbour figure uses `results/figure-1-example.json`, which is also included. Report figures are 162 mm wide and use the five-colour palette.
 
 ## Resident reference and six batch sizes
 
@@ -111,10 +111,10 @@ python analyze_gpu_trace.py --by-batch "$out/sweep.sqlite" "$out/traced/runs.csv
 python summarize_batch.py "$out"
 ```
 
-For a new repeat, choose `out=results/new_batch_repeat5` and use `--repeats 5` for both ordinary and traced requests. The archived boxplots retain every ordinary observation. The initial session recorded another compute process on each GPU; the repeat recorded none. Report their absolute times separately.
+For a new repeat, choose `out=results/new_batch_repeat5` and use `--repeats 5` for both ordinary and traced requests. Every ordinary observation appears in the archived boxplots. The initial session recorded another compute process on each GPU; the repeat recorded none. Keep the sessions' absolute times separate.
 
-For repeated 10,000-query requests with a resident reference, **2,048 per GPU** remains the practical batch choice. Its mean times were 55.97 and 34.45 ms in the two sessions; batch 5,000 gave 57.83 and 33.94 ms. The larger loss relative to either session's fastest mean was 1.52% at 2,048 versus 3.31% at 5,000. Peak tensor allocation was 3.19 versus 4.92 GiB per GPU. Both paired confidence intervals include zero; these observations do not establish an intrinsic speed advantage of 2,048 over 5,000. The main experiment uses batch 256 with per-request training uploads.
+For repeated 10,000-query requests with a resident reference, we recommend a batch of 2,048 per GPU. Its mean times were 55.97 and 34.45 ms in the two sessions; batch 5,000 took 57.83 and 33.94 ms. The larger percentage loss relative to either session's fastest mean was 1.52% at 2,048 and 3.31% at 5,000. Peak tensor allocation was 3.19 and 4.92 GiB per GPU, respectively. Both paired confidence intervals include zero, so these observations do not establish an intrinsic speed advantage of 2,048 over 5,000. The main experiment uses batch 256 and uploads training data on each request.
 
 ## Report and archive
 
-The complete local submission additionally contains the ten-page PDF, editable XeLaTeX source, original native traces and a SHA-256 manifest. The PDF embeds its source ZIP. See `report/BUILD.md` in that package. With that complete package and XeLaTeX installed, `python build_report.py` regenerates tables, compiles and verifies the submission. The public repository contains code and matching result data without the student cover page or full MNIST dataset. Code is released under the MIT License.
+The complete local submission contains the ten-page PDF, editable XeLaTeX source, original native traces and a SHA-256 manifest. The source ZIP is also embedded in the PDF. See `report/BUILD.md` in the package for build instructions. With the complete package and XeLaTeX installed, `python build_report.py` regenerates tables, compiles the report and verifies the submission. The public repository provides code and matching result data; it excludes the student cover page and full MNIST dataset. Code is released under the MIT License.
