@@ -50,7 +50,7 @@ An independent oracle computes direct int64 pixel differences and uses stable fu
 
 ## Three-session main experiment
 
-Run from the project root with new output paths. The measurement commands refuse to overwrite existing experiments.
+Run from the project root with new output paths. The measurement commands refuse to overwrite existing experiments. The `new_*` paths below are examples: choose another unused name if you have already run them. Archived results remain the inputs for rebuilding the submitted report.
 
 ```bash
 python benchmark_sessions.py --out results/new_main_repeat
@@ -77,6 +77,16 @@ Timing starts with tensors ready on the host and ends with ordered labels on the
 Process RSS records the high-water mark over the session's lifetime, so it cannot isolate allocations for each condition. An absence of competing processes in the samples does not establish exclusive hardware access.
 
 At 10,000 queries, mean ± SD across sessions was 20.066 ± 0.059 s on the CPU, 120.36 ± 2.18 ms on one H100 and 83.24 ± 1.38 ms on two. Mean two-GPU speedup was 1.446 (approximate 95% interval 1.408 to 1.484), with 72.3% efficiency. All labels agreed, and accuracy was 96.88%. At 100 queries, the speedup interval includes parity. All three sessions ran on one host and date.
+
+For 10,000 queries, the separate CUDA-event passes give the following mean stage times. Each row averages one profiled request per session across the three sessions in `results/main_repeat/device_profile.csv`.
+
+| Configuration and device | Upload (ms) | Compute (ms) | Return (ms) |
+|---|---:|---:|---:|
+| One H100, GPU 0 | 52.69 | 68.82 | 0.073 |
+| Two H100s, GPU 0 | 45.11 | 34.69 | 0.060 |
+| Two H100s, GPU 1 | 45.13 | 34.63 | 0.087 |
+
+Each GPU still uploads the full reference, so transfer time remains substantial as computation halves. These profiles are separate from ordinary wall timings and the Nsight trace. Do not subtract their sums from the main request times to estimate host overhead, or add overlapping device intervals. The scaling result covers one and two GPUs on this host.
 
 ## CUDA timeline and figures
 
@@ -112,6 +122,8 @@ python summarize_batch.py "$out"
 ```
 
 For a new repeat, choose `out=results/new_batch_repeat5` and use `--repeats 5` for both ordinary and traced requests. Every ordinary observation appears in the archived boxplots. The initial session recorded another compute process on each GPU; the repeat recorded none. Keep the sessions' absolute times separate.
+
+Table 4's 99.93 ms upload-per-request baseline is a median of eight requests in the separate placement experiment. Table 3's 83.24 ms is the mean of three session means in the main experiment. Their sessions and summaries differ; calculate the placement benefit within Table 4, not by combining these baselines.
 
 For repeated 10,000-query requests with a resident reference, we recommend a batch of 2,048 per GPU. Its mean times were 55.97 and 34.45 ms in the two sessions; batch 5,000 took 57.83 and 33.94 ms. The larger percentage loss relative to either session's fastest mean was 1.52% at 2,048 and 3.31% at 5,000. Peak tensor allocation was 3.19 and 4.92 GiB per GPU, respectively. Both paired confidence intervals include zero, so these observations do not establish an intrinsic speed advantage of 2,048 over 5,000. The main experiment uses batch 256 and uploads training data on each request.
 
